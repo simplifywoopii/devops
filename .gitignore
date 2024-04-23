@@ -111,3 +111,4 @@ terraform.rc
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,terraform,direnv,macos,linux
 *.hcl
 terraform-modules/backend.conf
+credentials.json
