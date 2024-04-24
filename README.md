@@ -1,4 +1,4 @@
-`backend.sample.conf` -> `backend.conf`
+`backend.sample.conf` -> `backend.conf`  
 `terraform.sample.tfvars` -> `terraform.tfvars`로 이름을 변경
 
 ```bash
