@@ -6,7 +6,13 @@ resource "google_container_cluster" "primary" {
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
 
-
+  master_auth {
+    client_certificate_config {
+      issue_client_certificate = true
+    }
+    
+  }
+ 
 
   addons_config {
     # httpLoadBalancing: default: enable
