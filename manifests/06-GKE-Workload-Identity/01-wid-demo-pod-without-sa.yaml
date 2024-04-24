@@ -8,6 +8,6 @@ spec:
   - image: google/cloud-sdk:slim
     name: wid-demo-without-sa
     command: ["sleep","infinity"]
-  #serviceAccountName: wid-ksa
-  # nodeSelector:
-  #   iam.gke.io/gke-metadata-server-enabled: "true"
+  # serviceAccountName: wid-ksa
+  nodeSelector:
+    iam.gke.io/gke-metadata-server-enabled: "true"

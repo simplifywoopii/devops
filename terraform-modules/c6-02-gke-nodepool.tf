@@ -26,11 +26,11 @@ resource "google_container_node_pool" "primary_nodes" {
     disk_size_gb = 20
     tags         = ["gke-node", "${local.name}-gke"]
 
-    workload_metadata_config {
-      mode = "GCE_METADATA"
+    workload_metadata_config {      
+      mode = "GKE_METADATA" # for workload identity
     }
     metadata = {
-      disable-legacy-endpoints = "true"
+      disable-legacy-endpoints = "true"      
     }
     spot            = true
     image_type      = "COS_CONTAINERD"
