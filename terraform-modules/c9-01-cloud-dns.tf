@@ -19,5 +19,5 @@ resource "google_dns_record_set" "frontend" {
 
   managed_zone = local.simplifywoopii_dns_managed_zone.name
 
-  rrdatas = [google_compute_address.static.address]
+  rrdatas = [google_compute_global_address.static.address]
 }
