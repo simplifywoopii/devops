@@ -7,6 +7,6 @@ resource "kubernetes_annotations" "workload_identity" {
     namespace = local.workload_identity.service_account_namespace
   }
   annotations = {
-    "iam.gke.io/gcp-service-account" = google_service_account.service_account.email
+    "iam.gke.io/gcp-service-account" = google_service_account.workload_identity.email
   }
 }

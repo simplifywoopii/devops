@@ -1,5 +1,5 @@
 variable "external_dns_namespace" {
-  type = string
+  type    = string
   default = "external-dns-ns"
 }
 

@@ -1,6 +1,6 @@
-resource "google_service_account" "service_account" {
+resource "google_service_account" "workload_identity" {
   depends_on = [
-    google_container_cluster.primary,
+    local.workload_identity,
     google_container_node_pool.primary_nodes
   ]
   account_id                   = "wid-gcpiam-sa"
@@ -13,10 +13,10 @@ resource "google_service_account" "service_account" {
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_iam
 resource "google_project_iam_binding" "workload_identity_binding" {
-  depends_on = [google_service_account.service_account]
+  depends_on = [google_service_account.workload_identity]
   project    = var.project_id
   role       = "roles/compute.viewer"
   members = [
-    "serviceAccount:${google_service_account.service_account.email}"
+    "serviceAccount:${google_service_account.workload_identity.email}"
   ]
 }

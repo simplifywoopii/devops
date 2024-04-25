@@ -1,7 +1,6 @@
 resource "helm_release" "ext_dns" {
   depends_on = [
     kubernetes_secret_v1.ext-dns-application-credentials,
-    google_project_iam_binding.workload_identity
   ]
   name       = "external-dns"
   namespace  = local.kube.external_dns.namespace

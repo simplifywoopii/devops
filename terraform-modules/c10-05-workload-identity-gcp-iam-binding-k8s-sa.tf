@@ -13,7 +13,7 @@ data "google_iam_policy" "workload_identity" {
 
 resource "google_service_account_iam_policy" "workload_identity" {
   depends_on         = [data.google_iam_policy.workload_identity]
-  service_account_id = google_service_account.service_account.name
+  service_account_id = google_service_account.workload_identity.name
   policy_data        = data.google_iam_policy.workload_identity.policy_data
 }
 
