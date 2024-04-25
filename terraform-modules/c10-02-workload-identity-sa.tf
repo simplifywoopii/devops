@@ -9,9 +9,9 @@ resource "google_service_account" "service_account" {
 
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_iam
-resource "google_service_account_iam_binding" "this" {
-  service_account_id = google_service_account.service_account.name
-  role = "roles/viewer"
+resource "google_project_iam_binding" "this" {
+  project = var.project_id
+  role = "roles/compute.viewer"
   members = [ 
     "serviceAccount:${google_service_account.service_account.email}"
    ]
