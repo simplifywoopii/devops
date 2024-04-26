@@ -1,0 +1,11 @@
+provider: google
+
+google:
+  zoneVisibility: public
+  serviceAccountSecret: external-dns-sa-credentials
+
+txtOwnerId: k8s
+
+serviceAccount:
+  create: false
+  name: external-dns-ksa

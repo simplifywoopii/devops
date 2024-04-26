@@ -5,6 +5,21 @@ configs:
   params:
     server.insecure: true
 
+  configs:
+    dex.config: |
+      connectors:
+      - config:
+          issuer: https://accounts.google.com
+          clientID: ${GOOGLE_OAUTH_CLIENT_ID}
+          clientSecret: ${GOOGLE_OAUTH_CLIENT_SECRET}
+        type: oidc
+        id: google
+        name: Google
+
+    rbac:
+      policy.csv: |
+        g, ${MY_EMAIL}, role:admin
+
 server:
   ingress:
     enabled: true
