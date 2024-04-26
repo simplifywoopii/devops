@@ -36,7 +36,7 @@ resource "google_container_cluster" "primary" {
   }
 
   location                 = var.region
-  min_master_version       = "1.29"
+  min_master_version       = var.gke_version
   remove_default_node_pool = true
   initial_node_count       = 1
 
