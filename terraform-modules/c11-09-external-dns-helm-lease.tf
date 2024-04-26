@@ -35,7 +35,7 @@ resource "helm_release" "ext_dns" {
   }
 
   set {
-    name  = "google.serviceAccountSecretKey"
+    name  = "google.serviceAccountSecret"
     value = local.kube.external_dns.credentials_sa_secret_key_name
   }
 }

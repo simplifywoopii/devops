@@ -1,5 +1,5 @@
 resource "google_service_account" "ext_dns_service_account" {
-  depends_on                   = [google_project_iam_binding.workload_identity]
+  depends_on                   = [google_compute_router_nat.nat]
   account_id                   = "external-dns-sa"
   display_name                 = "external-dns-sa"
   project                      = var.project_id
