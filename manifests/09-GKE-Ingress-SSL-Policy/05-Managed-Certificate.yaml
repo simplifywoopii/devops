@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert-for-ingress
+spec:
+  domains:
+  - default-ingress.simplifywoopii.com
+  - app1-ingress.simplifywoopii.com
+  - app2-ingress.simplifywoopii.com
