@@ -1,6 +1,10 @@
 import pulumi
 import pulumi_gcp as gcp
+import pulumi_kubernetes as kubernetes
+import pulumi_std as std
 
+
+# fetchStackValue = FetchStackValue("dev")
 # Get some provider-namespaced configuration values
 provider_cfg = pulumi.Config("gcp")
 gcp_project = provider_cfg.require("project")
@@ -166,9 +170,104 @@ users:
 """
 )
 
+# router
+gke_router = gcp.compute.Router(
+    "gke_router",
+    name="gke-router",
+    network=gke_network.name,
+    bgp=gcp.compute.RouterBgpArgs(asn=64514),
+)
+
+# nat gateway
+gke_nat = gcp.compute.RouterNat(
+    "nat",
+    name="gke-router-nat",
+    router=gke_router.name,
+    region=gke_router.region,
+    nat_ip_allocate_option="AUTO_ONLY",
+    source_subnetwork_ip_ranges_to_nat="ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES",
+    log_config=gcp.compute.RouterNatLogConfigArgs(
+        enable=True,
+        filter="ERRORS_ONLY",
+    ),
+    enable_dynamic_port_allocation=True,
+    min_ports_per_vm=64,
+    max_ports_per_vm=65536,
+)
+
+################################################
+# external dns
+ext_dns_sa = gcp.serviceaccount.Account(
+    "service_account",
+    account_id="external-dns-sa",
+    display_name="external-dns-sa",
+)
+
+ext_dns_iam_binding = gcp.projects.IAMBinding(
+    "ext_dns_iam_project_binding",
+    project="devops-421112",
+    role="roles/dns.admin",
+    members=[ext_dns_sa.email.apply(lambda x: f"serviceAccount:{x}")],
+)
+################################################################
+# kubernetes namespace create
+external_dns_ns = kubernetes.core.v1.Namespace(
+    "external_dns_ns",
+    metadata={
+        "name": "external-dns-ns"
+    }
+)
+
+external_dns_k8s_sa = kubernetes.core.v1.ServiceAccount(
+    "external_dns_k8s_sa",
+    metadata={
+        "name": "external-dns-ksa",
+        "namespace" : "external-dns-ns",
+        "annotations" : {
+            "iam.gke.io/gcp-service-account" : ext_dns_sa.email
+        }
+
+    }
+)
+
+################################################################
+# c11-06-external-dns-associate_iam_sa_with_ksa.tf
+admin_account_iam = gcp.serviceaccount.IAMBinding(
+    "external-dns-associate-iam-sa-with-ksa",
+    service_account_id=ext_dns_sa.name,
+    role="roles/iam.serviceAccountUser",
+    members=[
+        f"serviceAccount:{gcp_project}.svc.id.goog[external-dns-ns/external-dns-ksa]"
+    ],
+)
+
+################################################################
+ext_dns_sa_key = gcp.serviceaccount.Key(
+    "ext_dns_sa_key", service_account_id=ext_dns_sa.name
+)
+google_application_credentials = kubernetes.core.v1.Secret(
+    "google-application-credentials",
+    metadata=kubernetes.meta.v1.ObjectMetaArgs(
+        name="google-application-credentials",
+    ),
+    data={
+        "json": std.base64decode_output(input=ext_dns_sa_key.private_key).apply(
+            lambda invoke: invoke.result
+        ),
+    },
+)
+
+################################################################
+gcp.compute.SSLPolicy(
+    "sslpolicyResource",
+    min_tls_version="TLS_1_2",
+    name="gke-ingress-ssl-policy",
+    profile="MODERN",
+    project=gcp_project,
+)
+
+
 # Export some values for use elsewhere
 pulumi.export("networkName", gke_network.name)
 pulumi.export("networkId", gke_network.id)
-pulumi.export("clusterName", gke_cluster.name)
-pulumi.export("clusterId", gke_cluster.id)
-pulumi.export("kubeconfig", cluster_kubeconfig)
+pulumi.export("externalDnsEmail", ext_dns_sa.email)
