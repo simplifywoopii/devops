@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
   policy.csv: |
-    g, <email>, role:admin
+    g, ${GOOGLE_ADMIN_EMAIL}, role:admin
   policy.default: ""
   policy.matchMode: glob
   scopes: "[groups, email]"

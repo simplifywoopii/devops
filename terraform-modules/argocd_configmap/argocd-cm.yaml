@@ -6,8 +6,8 @@ data:
     connectors:
     - config:
         issuer: https://accounts.google.com
-        clientID: <clientID>
-        clientSecret: <clientSecret>
+        clientID: ${GOOGLE_SSO_CLIENT_ID}
+        clientSecret: ${GOOGLE_SSO_CLIENT_SECRET}
       type: oidc
       id: google
       name: Google
@@ -16,7 +16,7 @@ data:
   statusbadge.enabled: "false"
   timeout.hard.reconciliation: 0s
   timeout.reconciliation: 180s
-  url: https://argocd.simplifywoopii.com
+  url: https://${GOOGLE_HELM_ARGOCD_GLOBAL_DOMAIN}
 kind: ConfigMap
 metadata:
   annotations:

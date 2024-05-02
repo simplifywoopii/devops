@@ -22,13 +22,13 @@ if [[ $1 == "argo" ]] || [[ $1 == "all" ]]; then
     exists=$(helm ls -n ${GOOGLE_HELM_ARGOCD_NAMESPACE} | awk '{if ($1 == "argocd")  print $1}')
     if [[ $exists == ${GOOGLE_HELM_ARGOCD_NAME} ]];then
         # helm chart가 존재
-        kubectl delete -f ${ARGOCD_CONFIGMAP_DIR}/argocd-cm.yaml
-        kubectl delete -f ${ARGOCD_CONFIGMAP_DIR}/argocd-rbac-cm.yaml
+        envsubst < ${ARGOCD_CONFIGMAP_DIR}/argocd-cm.yaml | kubectl delete -f -
+        envsubst < ${ARGOCD_CONFIGMAP_DIR}/argocd-rbac-cm.yaml | kubectl delete -f -
 
-        kubectl create -f ${ARGOCD_CONFIGMAP_DIR}/argocd-cm.yaml --save-config
-        kubectl create -f ${ARGOCD_CONFIGMAP_DIR}/argocd-rbac-cm.yaml --save-config
+        envsubst < ${ARGOCD_CONFIGMAP_DIR}/argocd-cm.yaml | kubectl create --save-config -f -
+        envsubst < ${ARGOCD_CONFIGMAP_DIR}/argocd-rbac-cm.yaml | kubectl create --save-config -f -
 
-        echo "\n\n[INFO] Argocd rollout restart\n\n"
+        echo -e "\n\n[INFO] Argocd rollout restart\n\n"
 
         kubectl rollout restart deployment argocd-server -n ${GOOGLE_HELM_ARGOCD_NAMESPACE}
         kubectl rollout restart deployment argocd-applicationset-controller -n ${GOOGLE_HELM_ARGOCD_NAMESPACE}
