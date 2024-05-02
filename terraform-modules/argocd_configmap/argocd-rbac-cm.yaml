@@ -16,7 +16,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-rbac-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v2.10.7
-    helm.sh/chart: argo-cd-6.7.15
+    app.kubernetes.io/version: v2.10.9
+    helm.sh/chart: argo-cd-6.7.18
   name: argocd-rbac-cm
   namespace: argocd
