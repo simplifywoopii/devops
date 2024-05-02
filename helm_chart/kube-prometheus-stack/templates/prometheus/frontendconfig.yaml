@@ -6,4 +6,4 @@ metadata:
 spec:
   redirectToHttps:
     enabled: true
-  sslPolicy: gke-ingress-ssl-policy
+  sslPolicy: grafana-ssl-policy
