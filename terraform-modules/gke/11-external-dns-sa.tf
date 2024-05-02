@@ -1,7 +1,7 @@
 resource "google_service_account" "ext_dns_service_account" {
   depends_on                   = [google_compute_router_nat.nat]
-  account_id                   = "external-dns-sa"
-  display_name                 = "external-dns-sa"
+  account_id                   = local.gke.external_dns.name
+  display_name                 = local.gke.external_dns.disp_name
   project                      = var.project_id
   create_ignore_already_exists = true
   description                  = "service account for external dns"

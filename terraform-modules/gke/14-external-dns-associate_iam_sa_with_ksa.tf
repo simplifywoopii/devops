@@ -4,7 +4,7 @@ data "google_iam_policy" "ext_dns" {
     role = "roles/iam.workloadIdentityUser"
 
     members = [
-      "serviceAccount:${var.project_id}.svc.id.goog[${local.kube.external_dns.namespace}/${local.kube.external_dns.service_account}]",
+      "serviceAccount:${var.project_id}.svc.id.goog[${local.k8s.external_dns.ns}/${local.k8s.external_dns.sa}]",
     ]
   }
 }

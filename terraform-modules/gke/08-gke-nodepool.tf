@@ -35,7 +35,7 @@ resource "google_container_node_pool" "primary_nodes" {
     spot            = true
     image_type      = "COS_CONTAINERD"
     disk_type       = "pd-balanced"
-    service_account = "simplifywoopii@devops-421112.iam.gserviceaccount.com"
+    service_account = var.gke_master_sa_email
     shielded_instance_config {
       enable_integrity_monitoring = true
     }

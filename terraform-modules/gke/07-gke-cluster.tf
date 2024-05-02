@@ -1,22 +1,14 @@
-# "remove_default_node_pool"
-# Cluster는 default node pool 없이 생성이 불가능함
-# 그래서 remove_default_node_pool 값을 "true"로 설정하면 default node pool을 작게 생성한 뒤 바로 삭제
 resource "google_container_cluster" "primary" {
-  name       = "${local.name}-gke"
+  name       = var.gke_cluster_name
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
 
   master_auth {
     client_certificate_config {
       issue_client_certificate = true
-    }
-    
+    }    
   }
- 
-
   addons_config {
-    # httpLoadBalancing: default: enable
-    # horizontalPodAutoscaling: default: enable
     gce_persistent_disk_csi_driver_config {
       enabled = true
     }
@@ -25,11 +17,6 @@ resource "google_container_cluster" "primary" {
       enabled = true
     }
   }
-  # ip_allocation_policy {
-  #   stack_type              = "IPV4"
-  #   cluster_ipv4_cidr_block = lookup(var.master, "master_ipv4_cidr_block", "")
-
-  # }
 
   binary_authorization {
     evaluation_mode = "DISABLED"
@@ -46,11 +33,7 @@ resource "google_container_cluster" "primary" {
   release_channel {
     channel = "RAPID"
   }
-
-
-
   datapath_provider = "ADVANCED_DATAPATH"
-
   default_max_pods_per_node = 110
 
   private_cluster_config {
@@ -77,19 +60,16 @@ resource "google_container_cluster" "primary" {
     ]
   }
 
-
   monitoring_config {
     enable_components = ["SYSTEM_COMPONENTS"]
     managed_prometheus {
       enabled = true
     }
   }
+
   security_posture_config {
     mode               = "BASIC"
     vulnerability_mode = "VULNERABILITY_DISABLED"
   }
-
-
-
 }
 

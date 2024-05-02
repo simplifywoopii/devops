@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  gke:
+    build:
+      context: .
+    volumes:
+      - "./gke:/gke"
+
+    environment:
+      GKE_VPC_NAME: ${GKE_VPC_NAME}
+      GCP_REGION: ${GCP_REGION}
+      GKE_NODE_PER_ZONE: ${GKE_NODE_PER_ZONE}
+      GKE_MIN_MASTER_VERSION: ${GKE_MIN_MASTER_VERSION}
+      GKE_NODE_MACHINE_TYPE: ${GKE_NODE_MACHINE_TYPE}
+      TERRAFORM_WORKSPACE: ${TERRAFORM_WORKSPACE}
+      TERRAFORM_BACKEND_CONF: ${TERRAFORM_BACKEND_CONF}
+      TF_VAR_project_id: ${GOOGLE_PROJECT_ID}
+      TF_VAR_region: ${GOOGLE_REGION}
+      TF_VAR_owners: ${GOOGLE_OWNER}
+      TF_VAR_gke_cluster_name: ${GOOGLE_GKE_CLUSTER_NAME}
+      TF_VAR_gke_version: ${GOOGLE_GKE_VERSION}
+      TF_VAR_gke_num_nodes: ${GOOGLE_GKE_NUM_NODES}
+      TF_VAR_gke_machine_type: ${GOOGLE_GKE_MACHINE_TYPE}
+      TF_VAR_gke_master_sa_email: ${GOOGLE_GKE_MASTER_SA_EMAIL}
+      TF_VAR_gke_router_name: ${GOOGLE_GKE_ROUTER_NAME}
+      TF_VAR_gke_router_nat_name: ${GOOGLE_GKE_ROUTER_NAT_NAME}
+      TF_VAR_gke_ssl_policy_name: ${GOOGLE_GKE_SSL_POLICY_NAME}
+      TF_VAR_helm_external_dns_name: ${GOOGLE_HELM_EXTERNAL_DNS_NAME}
+      TF_VAR_helm_argocd_name: ${GOOGLE_HELM_ARGOCD_NAME}
+      TF_VAR_helm_argocd_namespace: ${GOOGLE_HELM_ARGOCD_NAMESPACE}
+      TF_VAR_helm_argocd_global_domain: ${GOOGLE_HELM_ARGOCD_GLOBAL_DOMAIN}
+
+    command: ["/bin/sh", "/entrypoint.sh"]

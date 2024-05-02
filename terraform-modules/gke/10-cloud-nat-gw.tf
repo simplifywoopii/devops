@@ -1,6 +1,6 @@
 resource "google_compute_router_nat" "nat" {
   depends_on                         = [google_compute_router.router]
-  name                               = "gke-us-central1-default-cloudnat-gw"
+  name                               = var.gke_router_nat_name
   router                             = google_compute_router.router.name
   region                             = google_compute_router.router.region
   nat_ip_allocate_option             = "AUTO_ONLY"
