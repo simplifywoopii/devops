@@ -25,6 +25,8 @@ grafana:
     ingressClassName: gce
     annotations:
       kubernetes.io/ingress.class: "gce"
+      networking.gke.io/managed-certificates: grafana-server
+      networking.gke.io/v1beta1.FrontendConfig: "grafana-server"
       external-dns.alpha.kubernetes.io/hostname: grafana.simplifywoopii.com
     hosts:
       - grafana.simplifywoopii.com
