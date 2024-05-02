@@ -1,5 +1,0 @@
-encryptionsalt: v1:zAVjm4Ul3JU=:v1:p5IXHDu1UCXWs+Gj:L17QOyUL/L4SSvoNYEEpqJm22jzUlw==
-config:
-  gcp:project: devops-421112
-  gcp:region: us-central1
-  pulumi_gke:nodesPerZone: "1"
