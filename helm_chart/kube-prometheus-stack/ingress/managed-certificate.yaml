@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: grafana-server
+  namespace: monitoring
+spec:
+  domains:
+    - grafana.simplifywoopii.com
