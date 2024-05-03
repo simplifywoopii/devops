@@ -29,31 +29,40 @@ grafana:
       networking.gke.io/v1beta1.FrontendConfig: "grafana-server"
       external-dns.alpha.kubernetes.io/hostname: grafana.simplifywoopii.com
     hosts:
-      - grafana.simplifywoopii.com
+    - grafana.simplifywoopii.com
     paths:
-      - /*
+    - /*
   persistence:
     type: pvc
     enabled: true
     accessModes:
-      - ReadWriteOnce
+    - ReadWriteOnce
     size: 5Gi
     finalizers:
-      - kubernetes.io/pvc-protection
+    - kubernetes.io/pvc-protection
+  frontendconfig:
+    name: grafana-server
+    namespace: monitoring
+    ssl_policy: grafana-ssl-policy
+  managed_certificate:
+    name: grafana-server
+    namespace: monitoring
+    domain: grafana.simplifywoopii.com
+
 
   # Provision grafana-dashboards-kubernetes
   dashboardProviders:
     dashboardproviders.yaml:
       apiVersion: 1
       providers:
-        - name: "grafana-dashboards-kubernetes"
-          orgId: 1
-          folder: "Kubernetes"
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
+      - name: "grafana-dashboards-kubernetes"
+        orgId: 1
+        folder: "Kubernetes"
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /var/lib/grafana/dashboards/grafana-dashboards-kubernetes
 
   dashboards:
     grafana-dashboards-kubernetes:

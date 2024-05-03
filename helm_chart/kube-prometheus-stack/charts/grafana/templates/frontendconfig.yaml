@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: {{ .Values.grafana.frontendconfig.name }}
+  namespace: {{ .Values.grafana.frontendconfig.namespace }}
+spec:
+  redirectToHttps:
+    enabled: true
+  sslPolicy: {{ .Values.grafana.frontendconfig.ssl_policy }}

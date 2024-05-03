@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: {{ .Values.grafana.managed_certificate.name }}
+  namespace: {{ .Values.grafana.managed_certificate.namespace }}
+spec:
+  domains:
+    - {{ .Values.grafana.managed_certificate.domain }}
