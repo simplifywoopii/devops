@@ -43,7 +43,7 @@ grafana:
   frontendconfig:
     name: grafana-server
     namespace: monitoring
-    ssl_policy: grafana-ssl-policy
+    ssl_policy: gke-grafana-ingress-ssl-policy
   managed_certificate:
     name: grafana-server
     namespace: monitoring
