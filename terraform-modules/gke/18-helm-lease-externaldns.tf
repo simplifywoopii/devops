@@ -1,5 +1,5 @@
 resource "helm_release" "external_dns" {
-  depends_on       = [google_compute_ssl_policy.ssl-policy]
+  depends_on       = [google_compute_ssl_policy.argocd-ssl-policy]
   name             = var.helm_external_dns_name
   namespace        = local.k8s.external_dns.ns
   timeout = 60

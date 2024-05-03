@@ -25,7 +25,8 @@ services:
       TF_VAR_gke_master_sa_email: ${GOOGLE_GKE_MASTER_SA_EMAIL}
       TF_VAR_gke_router_name: ${GOOGLE_GKE_ROUTER_NAME}
       TF_VAR_gke_router_nat_name: ${GOOGLE_GKE_ROUTER_NAT_NAME}
-      TF_VAR_gke_ssl_policy_name: ${GOOGLE_GKE_SSL_POLICY_NAME}
+      TF_VAR_gke_argocd_ssl_policy_name: ${GOOGLE_GKE_ARGOCD_SSL_POLICY_NAME}
+      TF_VAR_gke_grafana_ssl_policy_name: ${GOOGLE_GKE_GRAFANA_SSL_POLICY_NAME}
       TF_VAR_helm_external_dns_name: ${GOOGLE_HELM_EXTERNAL_DNS_NAME}
       TF_VAR_helm_argocd_name: ${GOOGLE_HELM_ARGOCD_NAME}
       TF_VAR_helm_argocd_namespace: ${GOOGLE_HELM_ARGOCD_NAMESPACE}

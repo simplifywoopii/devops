@@ -47,7 +47,11 @@ variable "gke_router_nat_name" {
   description = "google compute router nat gateway name"
 }
 
-variable "gke_ssl_policy_name" {
+variable "gke_argocd_ssl_policy_name" {
+  description = "google compute ssl policy"
+}
+
+variable "gke_grafana_ssl_policy_name" {
   description = "google compute ssl policy"
 }
 

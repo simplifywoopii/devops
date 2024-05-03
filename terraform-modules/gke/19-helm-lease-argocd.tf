@@ -59,6 +59,6 @@ resource "helm_release" "argocd" {
 
   set {
     name  = "server.ingress.gke.frontendConfig.sslPolicy"
-    value = var.gke_ssl_policy_name
+    value = var.gke_argocd_ssl_policy_name
   }
 }
