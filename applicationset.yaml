@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: applicationset
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - appname: kube-prometheus-stack
+        namespace: monitoring
+      - appname: metric-server
+        namespace: kube-system
+
+  template:
+    metadata:
+      name: '{{appname}}'
+    spec:
+      project: default
+      source:
+        path: helm_chart/{{appname}}
+        repoURL: 'https://github.com/simplifywoopii/devops.git'
+        targetRevision: HEAD
+        helm:
+          valueFiles:
+          - ci/dev-values.yaml
+      destination:
+        name: ''
+        namespace: '{{namespace}}'
+        server: 'https://kubernetes.default.svc'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
