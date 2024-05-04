@@ -37,11 +37,11 @@ ingress:
   className: "gce"
   annotations:
     ingressClassName: gce
-    networking.gke.io/managed-certificates: &mgcert_name argocd-server
-    networking.gke.io/v1beta1.FrontendConfig: &fe_cfg_name argocd-server
-    external-dns.alpha.kubernetes.io/hostname: nginx.simplifywoopii.com
+    networking.gke.io/managed-certificates: &mgcert_name nginx-server
+    networking.gke.io/v1beta1.FrontendConfig: &fe_cfg_name nginx-server
+    external-dns.alpha.kubernetes.io/hostname: &dns_host nginx.simplifywoopii.com
   hosts:
-    - host: &dns_host chart-example.local
+    - host: *dns_host
       paths:
         - path: /
           pathType: Prefix

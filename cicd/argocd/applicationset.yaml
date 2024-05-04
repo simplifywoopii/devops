@@ -17,6 +17,8 @@ spec:
             namespace: redis
           - app: airbnb-bo
             namespace: airbnb-dev
+          # - app: nginx
+          #   namespace: nginx
   template:
     metadata:
       name: "{{app}}"
