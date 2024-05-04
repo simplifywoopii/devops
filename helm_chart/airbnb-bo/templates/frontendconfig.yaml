@@ -8,4 +8,4 @@ spec:
     enabled: true
     #responseCodeName: RESPONSE_CODE
   # SSL Policy
-  sslPolicy: gke-ingress-ssl-policy
+  sslPolicy: {{ .Values.ingress.frontendconfig.sslPolicy }}
