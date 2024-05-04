@@ -13,6 +13,8 @@ spec:
             namespace: monitoring
           - app: metric-server
             namespace: kube-system
+          - app: redis
+            namespace: redis
   template:
     metadata:
       name: "{{app}}"
