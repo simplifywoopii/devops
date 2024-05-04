@@ -16,7 +16,7 @@ variable "azs" {
     "us-central1-a",
     "us-central1-b",
     "us-central1-c",
-    ]
+  ]
 }
 
 variable "gke_cluster_name" {
@@ -28,7 +28,7 @@ variable "gke_num_nodes" {
 }
 
 variable "gke_version" {
- type = string 
+  type = string
 }
 
 variable "gke_machine_type" {

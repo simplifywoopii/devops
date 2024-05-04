@@ -114,3 +114,4 @@ terraform-modules/backend.conf
 credentials.json
 helm_chart/argo-cd-6.7.15/configmap/argocd-cm.yaml
 helm_chart/argo-cd-6.7.15/configmap/argocd-rbac-cm.yaml
+helm_chart/.vscode
