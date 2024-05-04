@@ -1,14 +1,14 @@
-{{- if .Values.metrics.enabled }}
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: {{ include "starter-template.fullname" . }}
-spec:
-  selector:
-    matchLabels:
-      {{- include "starter-template.selectorLabels" . | nindent 6 }}
-  endpoints:
-  - port: http
-    path: {{ .Values.metrics.path }}
-    interval: 10s
-{{- end }}
+# {{- if .Values.metrics.enabled }}
+# apiVersion: monitoring.coreos.com/v1
+# kind: ServiceMonitor
+# metadata:
+#   name: {{ include "starter-template.fullname" . }}
+# spec:
+#   selector:
+#     matchLabels:
+#       {{- include "starter-template.selectorLabels" . | nindent 6 }}
+#   endpoints:
+#   - port: http
+#     path: {{ .Values.metrics.path }}
+#     interval: 10s
+# {{- end }}
