@@ -1,7 +1,7 @@
 
 resource "google_compute_ssl_policy" "sns-ssl-policy" {
   depends_on      = [google_compute_ssl_policy.grafana-ssl-policy]
-  name            = var.gke_sns_ssl_policy_name
+  name            = "gke-airbnb-dev-ingress-ssl-policy"
   min_tls_version = "TLS_1_2"
   profile         = "MODERN"
   project         = var.project_id
