@@ -48,7 +48,7 @@ ingress:
   tls: []
   frontendconfig:
     name: *fe_cfg_name
-    sslPolicy: "gke-argocd-ingress-ssl-policy"
+    sslPolicy: "gke-airbnb-dev-ingress-ssl-policy"
   managedCertificate:
     name: *mgcert_name
     host: *dns_host
