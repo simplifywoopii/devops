@@ -127,4 +127,4 @@ securityContext:
   # readOnlyRootFilesystem: false
 
 metrics:
-  enabled: true
+  enabled: false
