@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: us-central1-docker.pkg.dev/devops-421112/simplifywoopii-apps/airbnb-bo
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "57a81bb8a854c5417f058a9c66339e2f61e70b22"
 
