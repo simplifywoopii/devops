@@ -37,8 +37,8 @@ ingress:
   className: "gce"
   annotations:
     ingressClassName: gce
-    networking.gke.io/managed-certificates: &mgcert_name nginx-server
-    networking.gke.io/v1beta1.FrontendConfig: &fe_cfg_name nginx-server
+    # networking.gke.io/managed-certificates: &mgcert_name nginx-server
+    # networking.gke.io/v1beta1.FrontendConfig: &fe_cfg_name nginx-server
     external-dns.alpha.kubernetes.io/hostname: &dns_host nginx.simplifywoopii.com
   hosts:
     - host: *dns_host
