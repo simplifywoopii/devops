@@ -46,12 +46,12 @@ ingress:
         - path: /
           pathType: Prefix
   tls: []
-  frontendconfig:
-    name: *fe_cfg_name
-    sslPolicy: "gke-global-ingress-ssl-policy"
-  managedCertificate:
-    name: *mgcert_name
-    host: *dns_host
+  # frontendconfig:
+  #   name: *fe_cfg_name
+  #   sslPolicy: "gke-global-ingress-ssl-policy"
+  # managedCertificate:
+  #   name: *mgcert_name
+  #   host: *dns_host
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
