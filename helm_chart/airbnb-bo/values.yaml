@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: us-central1-docker.pkg.dev/devops-421112/simplifywoopii-apps/airbnb-bo
   pullPolicy: Always
-  tag: e764c5351c6f8866a777cadcc21e6c9c09e29c29
+  tag: 4d38a71c3a303f0b53d46a8e9c61533d436b567f
 imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
